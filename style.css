@@ -11,16 +11,34 @@ h1 {
 #result {
   font-size: 48px;
   margin: 40px;
-  transition: 0.2s;
 }
 
 button {
   font-size: 20px;
   padding: 10px 30px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 label {
   margin: 0 10px;
   font-size: 18px;
+}
+
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #333;
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+th {
+  background: #eee;
 }

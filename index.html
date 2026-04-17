@@ -11,18 +11,44 @@
 
 <h1>ポケモン抽選</h1>
 
+<!-- フィルター -->
 <label><input type="radio" name="mode" value="all" checked> 全候補</label>
 <label><input type="radio" name="mode" value="noMega"> メガなし</label>
 <label><input type="radio" name="mode" value="mega"> メガあり</label>
 
+<!-- 結果 -->
 <div id="result">---</div>
 
 <button onclick="toggle()">スタート / ストップ</button>
+
+<!-- 履歴 -->
+<h2>履歴</h2>
+
+<table id="logTable">
+  <thead>
+    <tr>
+      <th onclick="addToColumn(0)">列1</th>
+      <th onclick="addToColumn(1)">列2</th>
+      <th onclick="addToColumn(2)">列3</th>
+      <th onclick="addToColumn(3)">列4</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
 
 <script>
 let data = [];
 let interval = null;
 
+// CSV読み込み（No列あり対応）
 fetch("pokemon.csv")
   .then(res => res.text())
   .then(text => {
@@ -43,6 +69,7 @@ fetch("pokemon.csv")
     });
   });
 
+// フィルター処理
 function getFilteredList() {
   const mode = document.querySelector('input[name="mode"]:checked').value;
 
@@ -51,6 +78,7 @@ function getFilteredList() {
   return data;
 }
 
+// スロット開始/停止
 function toggle() {
   const result = document.getElementById("result");
 
@@ -63,11 +91,31 @@ function toggle() {
       const picked = list[r];
 
       result.textContent = picked.name;
+
     }, 50);
+
   } else {
     clearInterval(interval);
     interval = null;
   }
+}
+
+// 履歴追加（6×4）
+function addToColumn(col) {
+  const table = document.getElementById("logTable").getElementsByTagName("tbody")[0];
+  const value = document.getElementById("result").textContent;
+
+  if (!value || value === "---") return;
+
+  for (let i = 0; i < table.rows.length; i++) {
+    const cell = table.rows[i].cells[col];
+    if (cell.textContent === "") {
+      cell.textContent = value;
+      return;
+    }
+  }
+
+  alert("この列はいっぱいです");
 }
 </script>
 
