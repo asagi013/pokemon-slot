@@ -15,7 +15,7 @@
 <div id="helpModal" class="modal hidden">
   <div class="modal-content">
     <h3>使い方</h3>
-    <p>・列番号クリック → 抽選結果を記録</p>
+    <p>・番号クリック → 抽選結果を記録</p>
     <p>・ポケモン名クリック → 削除</p>
     <button onclick="toggleHelp()">閉じる</button>
   </div>
@@ -28,7 +28,7 @@
   <!-- 左 -->
   <div class="left">
 
-    <label><input type="radio" name="mode" value="all" checked> 全候補</label>
+    <label><input type="radio" name="mode" value="all" checked> すべて</label>
     <label><input type="radio" name="mode" value="noMega"> メガなし</label>
     <label><input type="radio" name="mode" value="mega"> メガあり</label>
 
@@ -44,10 +44,10 @@
     <table id="logTable">
       <thead>
         <tr>
-          <th onclick="addToColumn(0)">列1</th>
-          <th onclick="addToColumn(1)">列2</th>
-          <th onclick="addToColumn(2)">列3</th>
-          <th onclick="addToColumn(3)">列4</th>
+          <th onclick="addToColumn(0)">①</th>
+          <th onclick="addToColumn(1)">②</th>
+          <th onclick="addToColumn(2)">③</th>
+          <th onclick="addToColumn(3)">④</th>
         </tr>
       </thead>
 
@@ -62,7 +62,7 @@
     </table>
 
     <div class="reset-area">
-      <button onclick="resetTable()">全消去</button>
+      <button onclick="resetTable()">リセット</button>
     </div>
 
   </div>
@@ -145,8 +145,6 @@ function addToColumn(col) {
       return;
     }
   }
-
-  alert("この列はいっぱいです");
 }
 
 // 全消去

@@ -23,7 +23,7 @@ h1 {
 }
 
 #result {
-  font-size: 70px;
+  font-size: 54px;
   margin: 60px 0;
   min-height: 100px;
 }
@@ -34,21 +34,19 @@ button {
   cursor: pointer;
 }
 
-/* 右 */
 .right {
   width: 420px;
 }
 
-/* ★完全固定テーブル */
 table {
   border-collapse: collapse;
   margin: 0 auto;
-  table-layout: fixed;  /* ★重要 */
-  width: 400px;         /* ★4列×100px */
+  table-layout: fixed;
+  width: 400px;
 }
 
 th, td {
-  width: 100px;         /* ★完全固定 */
+  width: 100px;
   height: 40px;
   border: 1px solid #333;
   text-align: center;
@@ -59,13 +57,11 @@ th, td {
   text-overflow: ellipsis;
 }
 
-/* リセット */
 .reset-area {
   margin-top: 10px;
   text-align: right;
 }
 
-/* ヘルプ */
 .help-icon {
   position: absolute;
   top: 10px;
@@ -81,7 +77,6 @@ th, td {
   background: #fff;
 }
 
-/* モーダル */
 .modal {
   position: fixed;
   inset: 0;
