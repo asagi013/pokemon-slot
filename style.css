@@ -1,44 +1,61 @@
 body {
-  text-align: center;
   font-family: sans-serif;
-  margin-top: 80px;
+  margin: 0;
+  text-align: center;
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin: 20px 0;
+}
+
+/* 左右配置 */
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 100px; /* 自然な余白 */
+  padding: 20px;
+  align-items: flex-start;
+}
+
+/* 左：スロット */
+.left {
+  width: 400px;
 }
 
 #result {
-  font-size: 48px;
-  margin: 40px;
+  font-size: 80px;
+  margin: 60px 0;
+  min-height: 100px;
 }
 
 button {
-  font-size: 20px;
-  padding: 10px 30px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-label {
-  margin: 0 10px;
   font-size: 18px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
+/* 右：表 */
+.right {
+  width: 320px;
+}
+
+/* 表 */
 table {
-  margin: 20px auto;
   border-collapse: collapse;
+  margin: 0 auto;
 }
 
 th, td {
   border: 1px solid #333;
-  width: 120px;
+  width: 80px;
   height: 40px;
   text-align: center;
-  font-size: 16px;
-  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-th {
-  background: #eee;
+/* リセットボタン */
+.reset-area {
+  margin-top: 10px;
+  text-align: right;
 }
