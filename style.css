@@ -1,0 +1,31 @@
+body {
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 80px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+#result {
+  font-size: 48px;
+  margin: 40px;
+  transition: 0.2s;
+}
+
+.mega {
+  color: red;
+  font-weight: bold;
+}
+
+button {
+  font-size: 20px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+label {
+  margin: 0 10px;
+  font-size: 18px;
+}

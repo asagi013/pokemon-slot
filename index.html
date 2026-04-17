@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ポケモン抽選</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>ポケモン抽選</h1>
+
+<label><input type="radio" name="mode" value="all" checked> 全候補</label>
+<label><input type="radio" name="mode" value="noMega"> メガなし</label>
+<label><input type="radio" name="mode" value="mega"> メガあり</label>
+
+<div id="result">---</div>
+
+<button onclick="toggle()">スタート / ストップ</button>
+
+<script>
+let data = [];
+let interval = null;
+
+fetch("pokemon.csv")
+  .then(res => res.text())
+  .then(text => {
+    const lines = text.trim().split("\n");
+    const headers = lines[0].split(",");
+
+    data = lines.slice(1).map(line => {
+      const values = line.split(",");
+      let obj = {};
+
+      headers.forEach((h, i) => obj[h.trim()] = values[i].trim());
+
+      return {
+        no: Number(obj.No),
+        name: obj.name,
+        mega: Number(obj.mega)
+      };
+    });
+  });
+
+function getFilteredList() {
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+
+  if (mode === "mega") return data.filter(d => d.mega === 1);
+  if (mode === "noMega") return data.filter(d => d.mega === 0);
+  return data;
+}
+
+function toggle() {
+  const result = document.getElementById("result");
+
+  if (interval === null) {
+    interval = setInterval(() => {
+      const list = getFilteredList();
+      if (list.length === 0) return;
+
+      const r = Math.floor(Math.random() * list.length);
+      const picked = list[r];
+
+      result.textContent = picked.name;
+
+      if (picked.mega === 1) {
+        result.classList.add("mega");
+      } else {
+        result.classList.remove("mega");
+      }
+
+    }, 50);
+  } else {
+    clearInterval(interval);
+    interval = null;
+  }
+}
+</script>
+
+</body>
+</html>
