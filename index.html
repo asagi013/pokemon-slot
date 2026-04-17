@@ -9,6 +9,19 @@
 
 <body>
 
+<!-- ヘルプアイコン -->
+<div class="help-icon" onclick="toggleHelp()">？</div>
+
+<!-- ヘルプモーダル -->
+<div id="helpModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>使い方</h3>
+    <p>・列番号をクリック → 抽選結果をその列に記録</p>
+    <p>・ポケモン名をクリック → そのマスを削除</p>
+    <button onclick="toggleHelp()">閉じる</button>
+  </div>
+</div>
+
 <h1>ポケモン抽選</h1>
 
 <div class="container">
@@ -111,7 +124,7 @@ function toggle() {
   }
 }
 
-// 履歴追加（回転中は追加だけ禁止）
+// 履歴追加（回転中は追加のみ禁止）
 function addToColumn(col) {
   if (interval !== null) return;
 
@@ -126,7 +139,6 @@ function addToColumn(col) {
     if (cell.textContent === "") {
       cell.textContent = value;
 
-      // クリックで削除
       cell.onclick = function () {
         cell.textContent = "";
       };
@@ -138,7 +150,7 @@ function addToColumn(col) {
   alert("この列はいっぱいです");
 }
 
-// 全消去（常時OK）
+// 全消去
 function resetTable() {
   const cells = document.querySelectorAll("#logTable td");
 
@@ -146,6 +158,11 @@ function resetTable() {
     cell.textContent = "";
     cell.onclick = null;
   });
+}
+
+// ヘルプ表示
+function toggleHelp() {
+  document.getElementById("helpModal").classList.toggle("hidden");
 }
 </script>
 
