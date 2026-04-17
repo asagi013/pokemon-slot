@@ -34,6 +34,18 @@ button {
   cursor: pointer;
 }
 
+.modal-content button {
+  font-size: 16px;
+  padding: 4px 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.modal-content {
+  position: relative;
+}
+
 .right {
   width: 420px;
 }
