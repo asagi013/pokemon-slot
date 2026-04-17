@@ -37,6 +37,9 @@
     <label><input type="radio" name="mode" value="all" checked> すべて</label>
     <label><input type="radio" name="mode" value="noMega"> メガなし</label>
     <label><input type="radio" name="mode" value="mega"> メガあり</label>
+    <br><br>
+    <label><input type="radio" name="excludeMode" value="off" checked> 重複あり</label>
+    <label><input type="radio" name="excludeMode" value="on"> 重複なし</label>
 
     <div id="result">---</div>
 
@@ -167,6 +170,43 @@ function resetTable() {
 function toggleHelp() {
   document.getElementById("helpModal").classList.toggle("hidden");
 }
+
+function getTableValues() {
+  const cells = document.querySelectorAll("#logTable td");
+  const values = [];
+
+  cells.forEach(cell => {
+    if (cell.textContent !== "") {
+      values.push(cell.textContent);
+    }
+  });
+
+  return values;
+}
+
+function getFilteredList() {
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  const excludeMode = document.querySelector('input[name="excludeMode"]:checked').value;
+
+  let list = [];
+
+  if (mode === "mega") {
+    list = data.filter(d => d.mega === 1);
+  } else if (mode === "noMega") {
+    list = data.filter(d => d.mega === 0);
+  } else {
+    list = data;
+  }
+
+  // ★追加：表にあるやつ除外
+  if (excludeMode === "on") {
+    const used = getTableValues();
+    list = list.filter(d => !used.includes(d.name));
+  }
+
+  return list;
+}
+
 </script>
 
 </body>
