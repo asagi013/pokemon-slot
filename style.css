@@ -6,6 +6,16 @@ body {
 
 h1 {
   margin: 20px 0;
+  margin-top: 60px;
+}
+
+.title-box {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 14px;
+  text-align: left;
+  line-height: 1.4;
 }
 
 /* レイアウト */
@@ -14,6 +24,7 @@ h1 {
   justify-content: center;
   gap: 100px;
   padding: 20px;
+  margin-top: 60px;
   align-items: flex-start;
 }
 
