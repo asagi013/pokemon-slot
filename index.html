@@ -11,44 +11,57 @@
 
 <h1>ポケモン抽選</h1>
 
-<!-- フィルター -->
-<label><input type="radio" name="mode" value="all" checked> 全候補</label>
-<label><input type="radio" name="mode" value="noMega"> メガなし</label>
-<label><input type="radio" name="mode" value="mega"> メガあり</label>
+<div class="container">
 
-<!-- 結果 -->
-<div id="result">---</div>
+  <!-- 左：スロット -->
+  <div class="left">
 
-<button onclick="toggle()">スタート / ストップ</button>
+    <label><input type="radio" name="mode" value="all" checked> 全候補</label>
+    <label><input type="radio" name="mode" value="noMega"> メガなし</label>
+    <label><input type="radio" name="mode" value="mega"> メガあり</label>
 
-<!-- 履歴 -->
-<h2>履歴</h2>
+    <div id="result">---</div>
 
-<table id="logTable">
-  <thead>
-    <tr>
-      <th onclick="addToColumn(0)">列1</th>
-      <th onclick="addToColumn(1)">列2</th>
-      <th onclick="addToColumn(2)">列3</th>
-      <th onclick="addToColumn(3)">列4</th>
-    </tr>
-  </thead>
+    <button onclick="toggle()">スタート / ストップ</button>
 
-  <tbody>
-    <tr><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td></tr>
-    <tr><td></td><td></td><td></td><td></td></tr>
-  </tbody>
-</table>
+  </div>
+
+  <!-- 右：履歴 -->
+  <div class="right">
+
+    <table id="logTable">
+      <thead>
+        <tr>
+          <th onclick="addToColumn(0)">列1</th>
+          <th onclick="addToColumn(1)">列2</th>
+          <th onclick="addToColumn(2)">列3</th>
+          <th onclick="addToColumn(3)">列4</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="reset-area">
+      <button onclick="resetTable()">全消去</button>
+    </div>
+
+  </div>
+
+</div>
 
 <script>
 let data = [];
 let interval = null;
 
-// CSV読み込み（No列あり対応）
+// CSV読み込み
 fetch("pokemon.csv")
   .then(res => res.text())
   .then(text => {
@@ -69,7 +82,7 @@ fetch("pokemon.csv")
     });
   });
 
-// フィルター処理
+// フィルター
 function getFilteredList() {
   const mode = document.querySelector('input[name="mode"]:checked').value;
 
@@ -78,7 +91,7 @@ function getFilteredList() {
   return data;
 }
 
-// スロット開始/停止
+// スロット
 function toggle() {
   const result = document.getElementById("result");
 
@@ -88,9 +101,7 @@ function toggle() {
       if (list.length === 0) return;
 
       const r = Math.floor(Math.random() * list.length);
-      const picked = list[r];
-
-      result.textContent = picked.name;
+      result.textContent = list[r].name;
 
     }, 50);
 
@@ -100,8 +111,10 @@ function toggle() {
   }
 }
 
-// 履歴追加（6×4）
+// 履歴追加（回転中は追加だけ禁止）
 function addToColumn(col) {
+  if (interval !== null) return;
+
   const table = document.getElementById("logTable").getElementsByTagName("tbody")[0];
   const value = document.getElementById("result").textContent;
 
@@ -109,13 +122,30 @@ function addToColumn(col) {
 
   for (let i = 0; i < table.rows.length; i++) {
     const cell = table.rows[i].cells[col];
+
     if (cell.textContent === "") {
       cell.textContent = value;
+
+      // クリックで削除
+      cell.onclick = function () {
+        cell.textContent = "";
+      };
+
       return;
     }
   }
 
   alert("この列はいっぱいです");
+}
+
+// 全消去（常時OK）
+function resetTable() {
+  const cells = document.querySelectorAll("#logTable td");
+
+  cells.forEach(cell => {
+    cell.textContent = "";
+    cell.onclick = null;
+  });
 }
 </script>
 
