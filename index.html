@@ -9,15 +9,14 @@
 
 <body>
 
-<!-- ヘルプアイコン -->
+<!-- ヘルプ -->
 <div class="help-icon" onclick="toggleHelp()">？</div>
 
-<!-- ヘルプモーダル -->
 <div id="helpModal" class="modal hidden">
   <div class="modal-content">
     <h3>使い方</h3>
-    <p>・列番号をクリック → 抽選結果をその列に記録</p>
-    <p>・ポケモン名をクリック → そのマスを削除</p>
+    <p>・列番号クリック → 抽選結果を記録</p>
+    <p>・ポケモン名クリック → 削除</p>
     <button onclick="toggleHelp()">閉じる</button>
   </div>
 </div>
@@ -26,7 +25,7 @@
 
 <div class="container">
 
-  <!-- 左：スロット -->
+  <!-- 左 -->
   <div class="left">
 
     <label><input type="radio" name="mode" value="all" checked> 全候補</label>
@@ -39,7 +38,7 @@
 
   </div>
 
-  <!-- 右：履歴 -->
+  <!-- 右 -->
   <div class="right">
 
     <table id="logTable">
@@ -74,7 +73,7 @@
 let data = [];
 let interval = null;
 
-// CSV読み込み
+// CSV
 fetch("pokemon.csv")
   .then(res => res.text())
   .then(text => {
@@ -124,7 +123,7 @@ function toggle() {
   }
 }
 
-// 履歴追加（回転中は追加のみ禁止）
+// 追加（回転中禁止）
 function addToColumn(col) {
   if (interval !== null) return;
 
@@ -160,7 +159,7 @@ function resetTable() {
   });
 }
 
-// ヘルプ表示
+// ヘルプ
 function toggleHelp() {
   document.getElementById("helpModal").classList.toggle("hidden");
 }
