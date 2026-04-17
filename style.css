@@ -45,6 +45,11 @@ button {
   cursor: pointer;
 }
 
+label {
+  margin-right: 12px;
+  cursor: pointer;
+}
+
 .modal-content button {
   font-size: 16px;
   padding: 4px 10px;
