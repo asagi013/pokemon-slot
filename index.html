@@ -63,13 +63,6 @@ function toggle() {
       const picked = list[r];
 
       result.textContent = picked.name;
-
-      if (picked.mega === 1) {
-        result.classList.add("mega");
-      } else {
-        result.classList.remove("mega");
-      }
-
     }, 50);
   } else {
     clearInterval(interval);
