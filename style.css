@@ -123,3 +123,66 @@ th, td {
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 600px) {
+
+  /* 全体余白 */
+  body {
+    padding: 10px;
+  }
+
+  /* 上部（タイトル・？） */
+  .title-box {
+    font-size: 12px;
+  }
+
+  .help-icon {
+    top: 8px;
+    right: 8px;
+  }
+
+  /* メインを縦並び */
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* スロット */
+  .left {
+    width: 100%;
+  }
+
+  #result {
+    font-size: 48px;
+    margin: 30px 0;
+  }
+
+  /* ラジオボタン */
+  label {
+    display: inline-block;
+    margin: 5px 8px;
+  }
+
+  /* 表 */
+  .right {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th, td {
+    width: auto; /* スマホは可変にする */
+    height: 36px;
+    font-size: 12px;
+  }
+
+  /* ボタン */
+  button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+}
