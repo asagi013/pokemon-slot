@@ -58,16 +58,17 @@
           <th onclick="addToColumn(1)">②</th>
           <th onclick="addToColumn(2)">③</th>
           <th onclick="addToColumn(3)">④</th>
+          <th onclick="addToColumn(4)">⑤</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
       </tbody>
     </table>
 
@@ -83,7 +84,6 @@
 let data = [];
 let interval = null;
 
-// CSV
 fetch("pokemon.csv")
   .then(res => res.text())
   .then(text => {
@@ -104,7 +104,6 @@ fetch("pokemon.csv")
     });
   });
 
-// フィルター
 function getFilteredList() {
   const mode = document.querySelector('input[name="mode"]:checked').value;
 
@@ -113,7 +112,6 @@ function getFilteredList() {
   return data;
 }
 
-// スロット
 function toggle() {
   const result = document.getElementById("result");
 
@@ -133,7 +131,6 @@ function toggle() {
   }
 }
 
-// 追加（回転中禁止）
 function addToColumn(col) {
   if (interval !== null) return;
 
@@ -157,7 +154,6 @@ function addToColumn(col) {
   }
 }
 
-// 全消去
 function resetTable() {
   const cells = document.querySelectorAll("#logTable td");
 
@@ -199,7 +195,6 @@ function getFilteredList() {
     list = data;
   }
 
-  // ★追加：表にあるやつ除外
   if (excludeMode === "on") {
     const used = getTableValues();
     list = list.filter(d => !used.includes(d.name));
