@@ -129,6 +129,7 @@ th, td {
   /* 全体余白 */
   body {
     padding: 10px;
+    background: red;
   }
 
   /* 上部（タイトル・？） */
