@@ -129,7 +129,6 @@ th, td {
   /* 全体余白 */
   body {
     padding: 10px;
-    background: red;
   }
 
   /* 上部（タイトル・？） */
@@ -185,9 +184,4 @@ th, td {
     font-size: 16px;
     padding: 8px 16px;
   }
-
-  body {
-    background: blue !important;
-  }
-
 }
