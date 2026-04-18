@@ -145,12 +145,16 @@ th, td {
   .container {
     flex-direction: column;
     align-items: center;
-    gap: 100px;
+    gap: 40px;
   }
 
   /* スロット */
   .left {
     width: 100%;
+  }
+
+  .left button {
+    margin-bottom: 20px; /* ボタンと下の要素の距離 */
   }
 
   #result {
