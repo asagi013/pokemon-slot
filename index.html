@@ -132,65 +132,62 @@ function toggle() {
 }
 
 function setupCellClick() {
-  const cells = document.querySelectorAll("#logTable td");
 
-  cells.forEach(cell => {
+  const table = document.getElementById("logTable");
 
-    // クリック（追加 or 削除）
-    cell.onclick = function () {
+  table.addEventListener("click", function(e) {
+    const cell = e.target;
 
-      if (interval !== null) return;
+    if (cell.tagName !== "TD") return;
 
-      if (cell.textContent !== "") {
-        cell.textContent = "";
-        return;
-      }
+    if (interval !== null) return;
 
-      const value = document.getElementById("result").textContent;
-      if (!value || value === "---") return;
-
-      cell.textContent = value;
-    };
-
-    // ダブルクリック（編集）
-    cell.ondblclick = function () {
-
-      if (interval !== null) return;
-
-      const oldValue = cell.textContent;
-
-      const input = document.createElement("input");
-      input.type = "text";
-      input.value = oldValue;
-      input.style.width = "90%";
-
+    // 入ってる → 削除
+    if (cell.textContent !== "") {
       cell.textContent = "";
-      cell.appendChild(input);
-      input.focus();
+      return;
+    }
 
-      // 決定（Enter or フォーカス外れ）
-      function finish() {
-        cell.textContent = input.value.trim();
-      }
+    // 空 → 追加
+    const value = document.getElementById("result").textContent;
+    if (!value || value === "---") return;
 
-      input.addEventListener("blur", finish);
-      input.addEventListener("keydown", function(e) {
-        if (e.key === "Enter") finish();
-      });
-    };
-
+    cell.textContent = value;
   });
+
+  // ダブルクリック（編集）
+  table.addEventListener("dblclick", function(e) {
+    const cell = e.target;
+
+    if (cell.tagName !== "TD") return;
+    if (interval !== null) return;
+
+    const oldValue = cell.textContent;
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = oldValue;
+    input.style.width = "90%";
+
+    cell.textContent = "";
+    cell.appendChild(input);
+    input.focus();
+
+    function finish() {
+      cell.textContent = input.value.trim();
+    }
+
+    input.addEventListener("blur", finish);
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") finish();
+    });
+  });
+
 }
 
 function resetTable() {
   const cells = document.querySelectorAll("#logTable td");
-
-  cells.forEach(cell => {
-    cell.textContent = "";
-    cell.onclick = null;
-  });
-
-  setupCellClick();
+  cells.forEach(cell => cell.textContent = "");
 }
 
 window.onload = function() {
