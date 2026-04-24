@@ -54,11 +54,11 @@
     <table id="logTable">
       <thead>
         <tr>
-          <th onclick="addToColumn(0)">①</th>
-          <th onclick="addToColumn(1)">②</th>
-          <th onclick="addToColumn(2)">③</th>
-          <th onclick="addToColumn(3)">④</th>
-          <th onclick="addToColumn(4)">⑤</th>
+          <th>①</th>
+          <th>②</th>
+          <th>③</th>
+          <th>④</th>
+          <th>⑤</th>
         </tr>
       </thead>
 
@@ -131,27 +131,55 @@ function toggle() {
   }
 }
 
-function addToColumn(col) {
-  if (interval !== null) return;
+function setupCellClick() {
+  const cells = document.querySelectorAll("#logTable td");
 
-  const table = document.getElementById("logTable").getElementsByTagName("tbody")[0];
-  const value = document.getElementById("result").textContent;
+  cells.forEach(cell => {
 
-  if (!value || value === "---") return;
+    // クリック（追加 or 削除）
+    cell.onclick = function () {
 
-  for (let i = 0; i < table.rows.length; i++) {
-    const cell = table.rows[i].cells[col];
+      if (interval !== null) return;
 
-    if (cell.textContent === "") {
-      cell.textContent = value;
-
-      cell.onclick = function () {
+      if (cell.textContent !== "") {
         cell.textContent = "";
-      };
+        return;
+      }
 
-      return;
-    }
-  }
+      const value = document.getElementById("result").textContent;
+      if (!value || value === "---") return;
+
+      cell.textContent = value;
+    };
+
+    // ダブルクリック（編集）
+    cell.ondblclick = function () {
+
+      if (interval !== null) return;
+
+      const oldValue = cell.textContent;
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = oldValue;
+      input.style.width = "90%";
+
+      cell.textContent = "";
+      cell.appendChild(input);
+      input.focus();
+
+      // 決定（Enter or フォーカス外れ）
+      function finish() {
+        cell.textContent = input.value.trim();
+      }
+
+      input.addEventListener("blur", finish);
+      input.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") finish();
+      });
+    };
+
+  });
 }
 
 function resetTable() {
@@ -162,6 +190,10 @@ function resetTable() {
     cell.onclick = null;
   });
 }
+
+window.onload = function() {
+  setupCellClick();
+};
 
 // ヘルプ
 function toggleHelp() {
