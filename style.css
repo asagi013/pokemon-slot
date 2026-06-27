@@ -236,8 +236,6 @@ th, td {
 
 /* ★ 表ヘッダー　*/
 .sidebar-table-header {
-  position: sticky;
-  top: 0;
   background: #fff;
   padding: 6px 0;
   display: grid;
