@@ -148,6 +148,11 @@ function toggleHelp() {
 
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
+
+  // hidden を外す
+  sidebar.classList.remove("hidden");
+
+  // show をトグル
   sidebar.classList.toggle("show");
 
   if (sidebar.classList.contains("show")) {
