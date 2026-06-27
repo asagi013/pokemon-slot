@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ポケモン抽選</title>
-
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,6 +16,11 @@
   <div class="sidebar-header">
     <button class="sidebar-close" onclick="closeSidebar()">×</button>
     <span class="sidebar-title">ポケモン一覧</span>
+
+    <div class="sidebar-filter">
+      <button onclick="setSidebarFilter('all')" id="filter-all" class="active">すべて</button>
+      <button onclick="setSidebarFilter('mega')" id="filter-mega">メガのみ</button>
+    </div>
   </div>
 
   <div class="sidebar-body">
@@ -45,7 +49,6 @@
 <h1>ポケモン抽選</h1>
 
 <div class="container">
-  <!-- 左 -->
   <div class="left">
     <label><input type="radio" name="mode" value="all" checked> すべて</label>
     <label><input type="radio" name="mode" value="noMega"> メガなし</label>
@@ -59,16 +62,11 @@
     <button onclick="toggle()">スタート / ストップ</button>
   </div>
 
-  <!-- 右 -->
   <div class="right">
     <table id="logTable">
       <thead>
         <tr>
-          <th>①</th>
-          <th>②</th>
-          <th>③</th>
-          <th>④</th>
-          <th>⑤</th>
+          <th>①</th><th>②</th><th>③</th><th>④</th><th>⑤</th>
         </tr>
       </thead>
       <tbody>

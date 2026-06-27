@@ -125,62 +125,18 @@ th, td {
 
 /* スマホ対応 */
 @media screen and (max-width: 768px) {
-
-  body {
-    padding: 10px;
-  }
-
-  .title-box {
-    font-size: 12px;
-  }
-
-  .help-icon {
-    top: 8px;
-    right: 8px;
-  }
-
-  .container {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .left {
-    width: 100%;
-  }
-
-  .left button {
-    margin-bottom: 20px;
-  }
-
-  #result {
-    font-size: 48px;
-    margin: 30px 0;
-  }
-
-  label {
-    display: inline-block;
-    margin: 5px 8px;
-  }
-
-  .right {
-    width: 100%;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  th, td {
-    width: auto;
-    height: 36px;
-    font-size: 12px;
-  }
-
-  button {
-    font-size: 16px;
-    padding: 8px 16px;
-  }
+  body { padding: 10px; }
+  .title-box { font-size: 12px; }
+  .help-icon { top: 8px; right: 8px; }
+  .container { flex-direction: column; align-items: center; gap: 40px; }
+  .left { width: 100%; }
+  .left button { margin-bottom: 20px; }
+  #result { font-size: 48px; margin: 30px 0; }
+  label { display: inline-block; margin: 5px 8px; }
+  .right { width: 100%; }
+  table { width: 100%; }
+  th, td { width: auto; height: 36px; font-size: 12px; }
+  button { font-size: 16px; padding: 8px 16px; }
 }
 
 /* サイドバー開閉ボタン */
@@ -218,12 +174,11 @@ th, td {
   flex-direction: column;
 }
 
-/* 開いた状態 */
 .sidebar.show {
   transform: translateX(0);
 }
 
-/* 固定ヘッダー（× とタイトル） */
+/* 固定ヘッダー */
 .sidebar-header {
   position: sticky;
   top: 0;
@@ -236,7 +191,6 @@ th, td {
   z-index: 10000;
 }
 
-/* × ボタン */
 .sidebar-close {
   background: #eee;
   border: 1px solid #333;
@@ -246,10 +200,31 @@ th, td {
   font-size: 18px;
 }
 
-/* タイトル */
 .sidebar-title {
   font-size: 18px;
   font-weight: bold;
+}
+
+/* フィルタボタン */
+.sidebar-filter {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.sidebar-filter button {
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid #333;
+  background: #eee;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sidebar-filter button.active {
+  background: #4caf50;
+  color: #fff;
+  border-color: #4caf50;
 }
 
 /* スクロール部分 */
@@ -259,12 +234,29 @@ th, td {
   flex: 1;
 }
 
-/* リスト */
-.sidebar-body ul {
-  padding-left: 20px;
+/* 表形式のリスト */
+.sidebar-body li {
+  display: grid;
+  grid-template-columns: 50px 1fr 40px;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  align-items: center;
 }
 
-.sidebar-body li {
-  margin-bottom: 6px;
-  font-size: 14px;
+.col-no {
+  text-align: left;
+  color: #555;
+}
+
+.col-name {
+  text-align: left;
+  font-weight: bold;
+}
+
+.col-mega {
+  text-align: center;
+  color: #d00;
+  font-weight: bold;
 }

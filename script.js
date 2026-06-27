@@ -1,5 +1,6 @@
 let data = [];
 let interval = null;
+let sidebarFilter = "all"; // all or mega
 
 // CSV 読み込み
 fetch("pokemon.csv")
@@ -15,9 +16,9 @@ fetch("pokemon.csv")
       headers.forEach((h, i) => obj[h.trim()] = values[i].trim());
 
       return {
-        no: Number(obj["No."]),   // A列
-        name: obj["name"],        // B列
-        mega: Number(obj["mega"]) // C列
+        no: Number(obj["No."]),
+        name: obj["name"],
+        mega: Number(obj["mega"])
       };
     });
   });
@@ -154,13 +155,33 @@ function toggleSidebar() {
   sidebar.classList.toggle("show");
 
   if (sidebar.classList.contains("show")) {
-    toggleBtn.classList.add("hide");   // ← 開いたらボタン隠す
+    toggleBtn.classList.add("hide");
     updateSidebarListAll();
   } else {
-    toggleBtn.classList.remove("hide"); // ← 閉じたらボタン戻す
+    toggleBtn.classList.remove("hide");
   }
 }
 
+function closeSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const toggleBtn = document.querySelector(".sidebar-toggle");
+
+  sidebar.classList.remove("show");
+  sidebar.classList.add("hidden");
+  toggleBtn.classList.remove("hide");
+}
+
+// フィルタ切り替え
+function setSidebarFilter(mode) {
+  sidebarFilter = mode;
+
+  document.getElementById("filter-all").classList.toggle("active", mode === "all");
+  document.getElementById("filter-mega").classList.toggle("active", mode === "mega");
+
+  updateSidebarListAll();
+}
+
+// サイドバー更新
 function updateSidebarListAll() {
   const listElem = document.getElementById("sidebarList");
   listElem.innerHTML = "";
@@ -172,21 +193,23 @@ function updateSidebarListAll() {
     return;
   }
 
-  // No順に並べる
-  const sorted = [...data].sort((a, b) => a.no - b.no);
+  let list = [...data];
+
+  if (sidebarFilter === "mega") {
+    list = list.filter(d => d.mega === 1);
+  }
+
+  const sorted = list.sort((a, b) => a.no - b.no);
 
   sorted.forEach(d => {
     const li = document.createElement("li");
-    li.textContent = `No.${d.no} ${d.name}（メガ:${d.mega}）`;
+
+    li.innerHTML = `
+      <span class="col-no">${String(d.no).padStart(4, "0")}</span>
+      <span class="col-name">${d.name}</span>
+      <span class="col-mega">${d.mega === 1 ? "○" : ""}</span>
+    `;
+
     listElem.appendChild(li);
   });
-}
-
-function closeSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.querySelector(".sidebar-toggle");
-
-  sidebar.classList.remove("show");
-  sidebar.classList.add("hidden");
-  toggleBtn.classList.remove("hide");
 }
