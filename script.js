@@ -143,7 +143,7 @@ function toggleHelp() {
 }
 
 /* -------------------------
-   ここからサイドバー機能
+   サイドバー機能
 ------------------------- */
 
 function toggleSidebar() {
@@ -166,11 +166,12 @@ function updateSidebarListAll() {
     return;
   }
 
+  // No順に並べる
   const sorted = [...data].sort((a, b) => a.no - b.no);
 
   sorted.forEach(d => {
     const li = document.createElement("li");
-    li.textContent = `No.${d.no} ${d.name}`;
+    li.textContent = `No.${d.no} ${d.name}（メガ:${d.mega}）`;
     listElem.appendChild(li);
   });
 }
