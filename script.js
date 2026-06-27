@@ -15,9 +15,9 @@ fetch("pokemon.csv")
       headers.forEach((h, i) => obj[h.trim()] = values[i].trim());
 
       return {
-        no: Number(obj.No),
-        name: obj.name,
-        mega: Number(obj.mega)
+        no: Number(obj["No."]),   // A列
+        name: obj["name"],        // B列
+        mega: Number(obj["mega"]) // C列
       };
     });
   });
