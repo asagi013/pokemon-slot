@@ -223,14 +223,17 @@ th, td {
   transform: translateX(0);
 }
 
-/* 固定ヘッダー部分（× とタイトル） */
+/* 固定ヘッダー（× とタイトル） */
 .sidebar-header {
   position: sticky;
   top: 0;
   background: #fff;
-  padding: 10px 20px;
-  z-index: 10000;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   border-bottom: 1px solid #ccc;
+  z-index: 10000;
 }
 
 /* × ボタン */
@@ -241,6 +244,12 @@ th, td {
   padding: 4px 8px;
   cursor: pointer;
   font-size: 18px;
+}
+
+/* タイトル */
+.sidebar-title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* スクロール部分 */
