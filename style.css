@@ -239,7 +239,7 @@ th, td {
   background: #fff;
   padding: 6px 0;
   display: grid;
-  grid-template-columns: 60px 1fr 80px;
+  grid-template-columns: 70px 1fr 80px;
   gap: 8px;
   border-bottom: 2px solid #333;
   font-weight: bold;
@@ -249,7 +249,7 @@ th, td {
 /* 表形式のリスト */
 .sidebar-body li {
   display: grid;
-  grid-template-columns: 60px 1fr 80px;
+  grid-template-columns: 70px 1fr 80px;
   gap: 8px;
   padding: 6px 0;
   border-bottom: 1px solid #eee;
