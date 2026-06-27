@@ -148,15 +148,16 @@ function toggleHelp() {
 
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
+  const toggleBtn = document.querySelector(".sidebar-toggle");
 
-  // hidden を外す
   sidebar.classList.remove("hidden");
-
-  // show をトグル
   sidebar.classList.toggle("show");
 
   if (sidebar.classList.contains("show")) {
+    toggleBtn.classList.add("hide");   // ← 開いたらボタン隠す
     updateSidebarListAll();
+  } else {
+    toggleBtn.classList.remove("hide"); // ← 閉じたらボタン戻す
   }
 }
 

@@ -236,3 +236,6 @@ th, td {
   font-size: 14px;
 }
 
+.sidebar-toggle.hide {
+  display: none;
+}
