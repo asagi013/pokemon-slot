@@ -181,3 +181,12 @@ function updateSidebarListAll() {
     listElem.appendChild(li);
   });
 }
+
+function closeSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const toggleBtn = document.querySelector(".sidebar-toggle");
+
+  sidebar.classList.remove("show");
+  sidebar.classList.add("hidden");
+  toggleBtn.classList.remove("hide");
+}

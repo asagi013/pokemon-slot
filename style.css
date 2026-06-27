@@ -50,6 +50,23 @@ label {
   cursor: pointer;
 }
 
+/* モーダル */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: #fff;
+  width: 320px;
+  margin: 120px auto;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+  position: relative;
+}
+
 .modal-content button {
   font-size: 16px;
   padding: 4px 10px;
@@ -58,10 +75,11 @@ label {
   top: 10px;
 }
 
-.modal-content {
-  position: relative;
+.hidden {
+  display: none;
 }
 
+/* 右（表） */
 .right {
   width: 420px;
 }
@@ -79,7 +97,6 @@ th, td {
   border: 1px solid #333;
   text-align: center;
   font-size: 14px;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -90,6 +107,7 @@ th, td {
   text-align: left;
 }
 
+/* ヘルプアイコン */
 .help-icon {
   position: absolute;
   top: 10px;
@@ -105,33 +123,13 @@ th, td {
   background: #fff;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-  background: #fff;
-  width: 320px;
-  margin: 120px auto;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: left;
-}
-
-.hidden {
-  display: none;
-}
-
+/* スマホ対応 */
 @media screen and (max-width: 768px) {
 
-  /* 全体余白 */
   body {
     padding: 10px;
   }
 
-  /* 上部（タイトル・？） */
   .title-box {
     font-size: 12px;
   }
@@ -141,20 +139,18 @@ th, td {
     right: 8px;
   }
 
-  /* メインを縦並び */
   .container {
     flex-direction: column;
     align-items: center;
     gap: 40px;
   }
 
-  /* スロット */
   .left {
     width: 100%;
   }
 
   .left button {
-    margin-bottom: 20px; /* ボタンと下の要素の距離 */
+    margin-bottom: 20px;
   }
 
   #result {
@@ -162,13 +158,11 @@ th, td {
     margin: 30px 0;
   }
 
-  /* ラジオボタン */
   label {
     display: inline-block;
     margin: 5px 8px;
   }
 
-  /* 表 */
   .right {
     width: 100%;
   }
@@ -178,18 +172,18 @@ th, td {
   }
 
   th, td {
-    width: auto; /* スマホは可変にする */
+    width: auto;
     height: 36px;
     font-size: 12px;
   }
 
-  /* ボタン */
   button {
     font-size: 16px;
     padding: 8px 16px;
   }
 }
 
+/* サイドバー開閉ボタン */
 .sidebar-toggle {
   position: fixed;
   right: 10px;
@@ -203,6 +197,11 @@ th, td {
   z-index: 1000;
 }
 
+.sidebar-toggle.hide {
+  display: none;
+}
+
+/* サイドバー本体（統合済み） */
 .sidebar {
   position: fixed;
   top: 0;
@@ -212,11 +211,12 @@ th, td {
   background: #fff;
   border-left: 2px solid #333;
   padding: 20px;
+  padding-top: 50px; /* 閉じるボタンのスペース */
   box-shadow: -4px 0 10px rgba(0,0,0,0.2);
   transform: translateX(100%);
   transition: transform 0.3s ease;
-  z-index: 999;
-  overflow-y: auto; /* ← サイドバーだけスクロール */
+  z-index: 9999;
+  overflow-y: auto;
 }
 
 .sidebar.show {
@@ -236,6 +236,16 @@ th, td {
   font-size: 14px;
 }
 
-.sidebar-toggle.hide {
-  display: none;
+/* サイドバー閉じるボタン */
+.sidebar-close {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #eee;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10000;
 }
